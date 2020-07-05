@@ -14,6 +14,10 @@ import com.lp.adapter.core.KeyAndQueueMapping;
 import com.lp.adapter.core.QueueInformation;
 import com.lp.adapter.utils.StringUtil;
 
+/**
+ * 该类用于测试多线程处理
+ * 启动时，有30秒的暂停时间，在这期间可以通过URL方式增加处理线程
+ */
 @Component
 @Order(value = 2)
 public class SimulateRunner implements ApplicationRunner {
