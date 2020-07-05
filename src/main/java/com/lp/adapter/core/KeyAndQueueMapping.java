@@ -118,24 +118,9 @@ public class KeyAndQueueMapping {
 			return null;
 		}
 	}
-	
-//	/**
-//	 * 保存关键字和队列通道映射关系
-//	 * 
-//	 * @param key 机号
-//	 * @param value 队列通道号
-//	 */
-//	public synchronized static void save(String key, String value) {
-//
-//		// 保存关键字和队列通道名称的映射数据
-//		keyAndQueueMap.put(key, value);
-//
-//		// 保存队列通道名称和关键字列的映射数据
-//		queueAndKeyListMap.get(key).add(value);
-//	}
 
 	/**
-	 * 将机号从源队列移动到目标队列
+	 * 将关键字从源队列移动到目标队列
 	 * 
 	 * @param sourceQueueName 源队列名称
 	 * @param targetQueueName 目标队列名称
