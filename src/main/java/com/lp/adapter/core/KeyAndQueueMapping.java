@@ -17,8 +17,10 @@ public class KeyAndQueueMapping {
 
 	private static Logger logger = LoggerFactory.getLogger(KeyAndQueueMapping.class);
 
+	// 主要映射关系
 	private static Map<String, String> keyAndQueueMap = new HashMap<String, String>();
-	
+
+	// 该映射主要便于后续计数处理
 	private static Map<String, List<String>> queueAndKeyListMap = new HashMap<String, List<String>>();
 
 	/**
