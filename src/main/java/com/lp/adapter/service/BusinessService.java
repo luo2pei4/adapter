@@ -2,11 +2,11 @@ package com.lp.adapter.service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
 
+import com.lp.adapter.utils.SpringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -26,10 +26,8 @@ public class BusinessService extends Thread {
 
 	private static Logger logger = LoggerFactory.getLogger(BusinessService.class);
 
-	@Autowired
 	private AdsbRepository adsbRepository;
 
-	@Autowired
 	private FlightInfoRepository flightInfoRepository;
 	
 	private String queueName;
@@ -42,7 +40,9 @@ public class BusinessService extends Thread {
 	@Override
 	public void run() {
 
-		Queue<JSONObject> queue = QueueInformation.getQueue(queueName);
+		adsbRepository = (AdsbRepository)SpringUtil.getBean("adsbRepository");
+		flightInfoRepository = (FlightInfoRepository)SpringUtil.getBean("flightInfoRepository");
+		LinkedBlockingQueue<JSONObject> queue = QueueInformation.getQueue(queueName);
 
 		// 从队列通道中获取数据并打印
 		while (true) {
@@ -87,6 +87,12 @@ public class BusinessService extends Thread {
 
 							flightInfoEntity = new FlightInfoEntity();
 							flightInfoEntity.setAn(jsonObject.getString("an"));
+							flightInfoEntity.setUpdatetimes(0);
+
+						} else {
+
+							Integer updateTimes = flightInfoEntity.getUpdatetimes();
+							flightInfoEntity.setUpdatetimes(updateTimes + 1);
 						}
 
 						flightInfoEntity.setArr(jsonObject.getString("arr"));

@@ -64,6 +64,9 @@ public class FlightInfoEntity {
 	@Column(name = "createtime")
 	private LocalDateTime createtime;
 
+	@Column(name = "updatetimes")
+	private Integer updatetimes;
+
 	public Long getId() {
 		return id;
 	}
@@ -191,5 +194,13 @@ public class FlightInfoEntity {
 	public void setCreatetime(LocalDateTime createtime) {
 		this.createtime = createtime;
 	}
-	
+
+	public Integer getUpdatetimes() {
+		return updatetimes;
+	}
+
+	public void setUpdatetimes(Integer updatetimes) {
+		this.updatetimes = updatetimes;
+	}
+
 }
