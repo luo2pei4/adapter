@@ -35,5 +35,6 @@ CREATE TABLE `flightinfo` (
   `sendTime` datetime DEFAULT NULL COMMENT '发送时间',
   `threadid` varchar(48) DEFAULT NULL,
   `createtime` timestamp NULL DEFAULT NULL,
+  `updatetimes` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8mb4
