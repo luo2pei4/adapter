@@ -5,12 +5,11 @@ import com.lp.adapter.utils.StringUtil;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class QueueInformation {
 
-	private static Map<String, LinkedBlockingQueue<JSONObject>> queueMap = new HashMap<String, LinkedBlockingQueue<JSONObject>>();
+	private static Map<String, LinkedBlockingQueue<JSONObject>> queueMap = new HashMap<>();
 
 	/**
 	 * 新增队列
@@ -23,7 +22,7 @@ public class QueueInformation {
 
 		if (!StringUtil.isEmpty(queueName)) {
 
-			queueMap.put(queueName.trim(), new LinkedBlockingQueue<JSONObject>(10000));
+			queueMap.put(queueName.trim(), new LinkedBlockingQueue<>(10000));
 		}
 	}
 
@@ -36,10 +35,7 @@ public class QueueInformation {
 
 		if (!StringUtil.isEmpty(queueName)) {
 
-			if (queueMap.containsKey(queueName.trim())) {
-
-				queueMap.remove(queueName.trim());
-			}
+			queueMap.remove(queueName.trim());
 		}
 	}
 
