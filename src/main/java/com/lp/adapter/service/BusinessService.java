@@ -29,9 +29,14 @@ public class BusinessService extends Thread {
 	private AdsbRepository adsbRepository;
 
 	private FlightInfoRepository flightInfoRepository;
-	
+
 	private String queueName;
 
+	/**
+	 * 设置业务线程对应的队列通道名称
+	 *
+	 * @param queueName 队列通道名称(线程名称)
+	 */
 	public void setQueueName(String queueName) {
 
 		this.queueName = queueName;

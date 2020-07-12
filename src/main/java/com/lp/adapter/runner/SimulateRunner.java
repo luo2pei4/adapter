@@ -1,4 +1,4 @@
-package com.lp.adapter;
+package com.lp.adapter.runner;
 
 import java.io.BufferedReader;
 import java.io.File;
