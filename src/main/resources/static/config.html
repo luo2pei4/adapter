@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+        <script src="../js/vue.min.js"></script>
+        <script src="../js/axios.min.js"></script>
+    </head>
+    <body>
+        <div id="configs">
+            <select name="sourcetype" v-model="sourcetype">
+                <option value="0"></option>
+                <option value="1">ActiveMQ</option>
+                <option value="2">RabbitMQ</option>
+                <option value="3">Kafka</option>
+            </select>
+            <br>
+            <input type="text" placeholder="线程数量" name="threadnum" v-model="threadnum">
+            <br>
+            <button v-on:click="start">启动</button>
+        </div>
+    </body>
+    <script lang="javascript">
+        var app = new Vue({
+            el:"#configs",
+            data:{
+                sourcetype: '',
+                threadnum: 0
+            },
+            methods:{
+                start: function(event) {
+                    axios.post('/adapter/start', {
+                        sourcetype: this.sourcetype,
+                        threadnum: this.threadnum
+                    }).then(function (response) {
+                        console.log(response);
+                    }).catch(function (error) {
+                        console.log(error);
+                    });
+                }
+            }
+        })
+    </script>
+</html>

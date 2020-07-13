@@ -18,10 +18,10 @@ public class KeyAndQueueMapping {
 	private static Logger logger = LoggerFactory.getLogger(KeyAndQueueMapping.class);
 
 	// 主要映射关系
-	private static Map<String, String> keyAndQueueMap = new HashMap<String, String>();
+	private static Map<String, String> keyAndQueueMap = new HashMap<>();
 
 	// 该映射主要便于后续计数处理
-	private static Map<String, List<String>> queueAndKeyListMap = new HashMap<String, List<String>>();
+	private static Map<String, List<String>> queueAndKeyListMap = new HashMap<>();
 
 	/**
 	 * 添加队列名和关键字列表映射
@@ -30,7 +30,7 @@ public class KeyAndQueueMapping {
 	 */
 	public synchronized static void addInitialMapping(String queueName) {
 		
-		List<String> list = new ArrayList<String>();
+		List<String> list = new ArrayList<>();
 		queueAndKeyListMap.put(queueName, list);
 	}
 
@@ -52,7 +52,7 @@ public class KeyAndQueueMapping {
 		} else {
 
 			// 没有映射关系的情况为关键字分配队列通道
-			Map<String, Integer> compareMap = new HashMap<String, Integer>();
+			Map<String, Integer> compareMap = new HashMap<>();
 
 			// 获取关键字数量最少的队列通道
 			for (String queue : queueAndKeyListMap.keySet()) {
@@ -67,8 +67,6 @@ public class KeyAndQueueMapping {
 					return e1.getValue().compareTo(e2.getValue());
 				}
 			});
-
-			logger.info("Queue name: " + minEntry.getKey() + ", Key list size: " + minEntry.getValue());
 
 			// 保存关键字和队列通道名称的映射数据
 			keyAndQueueMap.put(key, minEntry.getKey());
@@ -99,10 +97,10 @@ public class KeyAndQueueMapping {
 	}
 
 	/**
-	 * 通过关键字在隐射数据中获取线程名称
+	 * 通过关键字在映射数据中获取队列通道名称
 	 * 
 	 * @param key 关键字
-	 * @return
+	 * @return 返回队列通道的名称
 	 */
 	public synchronized static String getQueueName(String key) {
 		
@@ -111,14 +109,7 @@ public class KeyAndQueueMapping {
 			return null;
 		}
 
-		if (keyAndQueueMap.containsKey(key.trim())) {
-
-			return keyAndQueueMap.get(key.trim());
-
-		} else {
-
-			return null;
-		}
+		return keyAndQueueMap.getOrDefault(key.trim(), null);
 	}
 
 	/**
@@ -130,11 +121,7 @@ public class KeyAndQueueMapping {
 	public synchronized static void move(String sourceQueueName, String targetQueueName) {
 
 		// 移动前后队列名相同的情况下不做处理
-		if (sourceQueueName.equals(targetQueueName)) {
-
-			return;
-
-		} else {
+		if (!sourceQueueName.equals(targetQueueName)) {
 
 			// 遍历关键字和队列映射关系，找出所有迁移源为sourceQueueName的机号，并将迁移源队列该为目标队列
 			for (String key : keyAndQueueMap.keySet()) {
