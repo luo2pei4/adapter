@@ -2,22 +2,23 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Title</title>
+        <title>Adapter</title>
         <script src="../js/vue.min.js"></script>
         <script src="../js/axios.min.js"></script>
     </head>
     <body>
         <div id="configs">
-            <select name="sourcetype" v-model="sourcetype">
-                <option value="0"></option>
-                <option value="1">ActiveMQ</option>
-                <option value="2">RabbitMQ</option>
-                <option value="3">Kafka</option>
-            </select>
-            <br>
-            <input type="text" placeholder="线程数量" name="threadnum" v-model="threadnum">
-            <br>
-            <button v-on:click="start">启动</button>
+            <div></div>
+            <div>
+                <select name="sourcetype" v-model="sourcetype">
+                    <option value="0"></option>
+                    <option value="1">ActiveMQ</option>
+                    <option value="2">RabbitMQ</option>
+                    <option value="3">Kafka</option>
+                </select>
+            </div>
+            <div><input type="text" placeholder="线程数量" name="threadnum" v-model="threadnum"></div>
+            <div><button v-on:click="start">启动</button></div>
         </div>
     </body>
     <script lang="javascript">
